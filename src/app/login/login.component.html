@@ -1,0 +1,27 @@
+<div style="text-align:center" *ngIf="!loggedin">
+  <div class='loginbox'> 
+    <div >
+      Login:
+    </div>
+    <div>
+        <input type="text" placeholder='Email Id' [(ngModel)]="email">
+    </div>
+    <div>
+        <input type="password" placeholder='Password' [(ngModel)]="password">
+    </div>
+
+    <div>
+        <button (click)="login()">Login</button>
+    </div>
+  </div> 
+    
+  </div>
+  <div *ngIf="loggedin">
+    <nav class="navlinks">
+      <a routerLink="home" routerLinkActive="active">Home</a>
+      <a routerLink="dpersons">Staff</a>
+      <a routerLink="orders">About</a>
+    </nav>
+
+  <router-outlet></router-outlet>
+  </div>

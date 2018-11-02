@@ -1,0 +1,56 @@
+.dpersonslayout{
+    padding-top:2%;
+    margin-left: 5px;
+}
+
+label {
+    display: block;
+    margin: 0;
+    /* padding: 0; */
+    width: 142px;
+    font-size: 12px;
+}
+form {
+    margin-top: 0em;
+    border: 3px solid lightsteelblue;
+    width: 75%;
+    padding: 15px;
+}
+
+button, input {
+    overflow: visible;
+    width: -webkit-fill-available;
+    font-size: 13px;
+    height: 30px;
+}
+
+table ,tr td{
+    border:1px solid rgb(250, 240, 240);
+    word-break: break-word;
+}
+tbody {
+    display:block;
+    height:480px;
+    overflow:auto;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+thead {
+    width: calc( 100% - 1.35em );
+    font-weight: bold;
+}
+table {
+    width:100%;
+}
+
+
+textarea{
+margin-top: 0px;
+margin-bottom: 0px;
+height: 70px;
+font-size: 13px;
+width: -webkit-fill-available;
+}

@@ -1,0 +1,99 @@
+<div class='homelayout'>
+    <div class='searchfield row'>
+            <div class='col-4'>
+                    <label>Contact Number: </label>
+                    <input type="text" id="myInputcontact" #inputstring (keyup.enter)="searchcontact(inputstring.value)" placeholder="Search..">           
+            </div>
+            <div class='col-4'>
+                    <label>Order Number: </label>
+                    <input type="text" id="myInputorder" #inputstring (keyup.enter)="searchorder(inputstring.value)" placeholder="Search..">           
+            </div>
+        <div class='col-4'>
+            <button class='refresh' (click)="refreshdata()">Refresh</button>
+            <button class='save' (click)="savedata()">SAVE</button>
+        </div>
+    </div>
+              
+        <div class="layout row">
+            <div class="container col-8" >      
+                <table id="ordertable" class="table">
+                    <thead >
+                    <tr>
+                        <th style="width: 2%">-</th>
+                        <th>Item ID</th>
+                        <th>Order Date</th>
+                        <th>Contact number</th>
+                        <th>Address</th>
+                        <th>Restaurant ID</th>
+                        <th>Packaging (Rs)</th>
+                        <th>Delivery (Rs)</th>
+                        <th>Cart Amount(Rs)</th>
+                        <th>Total(Rs)</th>
+                        <th>Assign</th>
+                        <th>Staus</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr  (click)="selectorder(item.orderid)" *ngFor="let item of myorders; let i = index" [ngClass] = "{'highlighted' : item.orderid == selectedName}">
+                        <td style="width: 2%">{{i+1}}.</td>
+                        <td><a>{{item.orderid}}</a></td>
+                        <td>{{item.orderdate}}</td>
+                        <td>{{item.contactnumber}}</td>
+                        <td>{{item.address}}</td>
+                        <td>{{item.restaurantid}}</td>
+                        <td>{{item.packagingcharge}}</td>
+                        <td>{{item.deliverycharge}}</td>
+                        <td>{{item.totalcartamount}}</td>
+                        <td>{{item.totalcartamount+item.deliverycharge+item.packagingcharge}}</td>
+                        <td>
+                            <div>     
+                                                                  
+                                <select  [(ngModel)]="iduser[i]" (change)="selectuser(i)" >
+                                    <option selected value='None'>None</option>
+                                    <option *ngFor="let user of users; let i = index"  title={{user.username}}-{{user.contactnum}} value={{user.username}}>{{user.username}}-{{user.contactnum}}</option>
+                                </select>
+                                <div> {{item.assigneduser}}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div >
+                                
+                                <select [(ngModel)]="idorder[i]" (change)="selectorderstatus(i)">
+                                    <option value="Delivered">Delivered</option>
+                                    <option value="In progress">In progress</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="Not Assigned">Not Assigned</option>
+                                </select>
+                                <div> {{item.orderstatus}}</div> 
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="details col-4" >           
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>OrderId</th>
+                        <th>Ordertype</th>
+                        <th>cost</th>
+                        <th>name</th>
+                        <th>quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody >
+                    <tr *ngFor="let item of gorderdetails; let i = index">
+                        <td>{{item.OrderId}}</td>
+                        <td>{{item.Ordertype}}</td>
+                        <td>{{item.cost}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.quantity}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <ng4-loading-spinner></ng4-loading-spinner>       
+</div>
