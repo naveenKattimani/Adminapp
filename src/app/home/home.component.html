@@ -1,14 +1,18 @@
 <div class='homelayout'>
     <div class='searchfield row'>
-            <div class='col-4'>
+            <div class='col-3'>
                     <label>Contact Number: </label>
                     <input type="text" id="myInputcontact" #inputstring (keyup.enter)="searchcontact(inputstring.value)" placeholder="Search..">           
             </div>
-            <div class='col-4'>
+            <div class='col-3'>
                     <label>Order Number: </label>
                     <input type="text" id="myInputorder" #inputstring (keyup.enter)="searchorder(inputstring.value)" placeholder="Search..">           
             </div>
-        <div class='col-4'>
+            <div class='col-3'>
+                    <label>Status: </label>
+                    <input type="text" id="myInputstatus" #inputstring (keyup.enter)="searchstatus(inputstring.value)" placeholder="Search..">           
+            </div>
+        <div class='col-3'>
             <button class='refresh' (click)="refreshdata()">Refresh</button>
             <button class='save' (click)="savedata()">SAVE</button>
         </div>
@@ -34,7 +38,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr  (click)="selectorder(item.orderid)" *ngFor="let item of myorders; let i = index" [ngClass] = "{'highlighted' : item.orderid == selectedName}">
+                    <tr  (click)="selectorder(item.orderid,$event)" *ngFor="let item of myorders; let i = index" [ngClass] = "{'highlighted' : item.orderid == selectedName}">
                         <td style="width: 2%">{{i+1}}.</td>
                         <td><a>{{item.orderid}}</a></td>
                         <td>{{item.orderdate}}</td>
@@ -46,25 +50,18 @@
                         <td>{{item.totalcartamount}}</td>
                         <td>{{item.totalcartamount+item.deliverycharge+item.packagingcharge}}</td>
                         <td>
-                            <div>     
-                                                                  
-                                <select  [(ngModel)]="iduser[i]" (change)="selectuser(i)" >
-                                    <option selected value='None'>None</option>
-                                    <option *ngFor="let user of users; let i = index"  title={{user.username}}-{{user.contactnum}} value={{user.username}}>{{user.username}}-{{user.contactnum}}</option>
+                            <div>                                                                      
+                                <select   (change)="selectuser(i,$event.target)" >
+                                    <option value='None'>None</option>
+                                    <option *ngFor="let user of users; let i = index"  title={{user.username}}-{{user.contactnum}} value={{user.username}} [attr.selected]="user.username == item.assigneduser ? true : null">{{user.username}}</option>
                                 </select>
-                                <div> {{item.assigneduser}}</div>
                             </div>
                         </td>
                         <td>
-                            <div >
-                                
-                                <select [(ngModel)]="idorder[i]" (change)="selectorderstatus(i)">
-                                    <option value="Delivered">Delivered</option>
-                                    <option value="In progress">In progress</option>
-                                    <option value="Cancelled">Cancelled</option>
-                                    <option value="Not Assigned">Not Assigned</option>
+                            <div >                                
+                                <select  (change)="selectorderstatus(i,$event.target)">                                     
+                                        <option *ngFor="let status of statusArray; let i = index"  title={{status}} value={{status}} [attr.selected]="status == item.orderstatus ? true : null">{{status}}</option>
                                 </select>
-                                <div> {{item.orderstatus}}</div> 
                             </div>
                         </td>
                     </tr>

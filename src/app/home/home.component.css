@@ -47,7 +47,8 @@ button, input {
 
 select {
     text-transform: none;
-    width: 75px;
+    width: 73px;
+    font-size: 11px;
 }
 
 .table[_ngcontent-c1] {
@@ -69,7 +70,8 @@ tr.highlighted td {
 .table td, .table th {
     padding: .2rem;
     vertical-align: top;
-    font-size: 11px;
+    font-size: 10px;
+    line-height: 10px;
 }
 
 table ,tr td{
@@ -78,7 +80,7 @@ table ,tr td{
 }
 tbody {
     display:block;
-    height:550px;
+    height:420px;
     overflow:auto;
 }
 thead, tbody tr {
@@ -92,7 +94,7 @@ thead {
     background-color: whitesmoke;
 }
 table {
-    width:100%;
+    width:103%;
 }
 /* .tbodystyle[_ngcontent-c1] {
     height: 600px;

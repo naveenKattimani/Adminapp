@@ -34,3 +34,8 @@ a:hover {
     border: 2px solid grey;
     width: 20%;
 }
+
+button, input {
+    overflow: visible;
+    margin: 13px;
+}

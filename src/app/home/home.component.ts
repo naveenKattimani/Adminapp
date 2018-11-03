@@ -19,13 +19,14 @@ export class HomeComponent implements OnInit {
   selectedusername;
   users=[];
   iduser = [];
-  idorder=[]
+  idorder=[];
+  statusArray=[];
   userassigned="";
   orderstatus="";
 
   constructor( private ng4LoadingSpinnerService: Ng4LoadingSpinnerService) { 
     //setTimeout( () => { this.refreshdata(); }, 1000 );
-
+    this.statusArray=['Not Assigned','Delivered','In Progress','Cancelled'];
   }
 
   ngOnInit() {
@@ -60,6 +61,8 @@ export class HomeComponent implements OnInit {
   }
 
   refreshdata(){    
+     this.userassigned="";
+    this.orderstatus=""; 
     this.ng4LoadingSpinnerService.show();      
       setTimeout(function() {
         this.getusers();
@@ -122,10 +125,9 @@ export class HomeComponent implements OnInit {
     })    
   }
 
-  selectorder(value:any)
+  selectorder(value:any,event)
   {
-    // this.userassigned="";
-    // this.orderstatus=""; 
+    
     console.log(value);
     if(this.selectedName!=value)
     {
@@ -137,7 +139,6 @@ export class HomeComponent implements OnInit {
         this.ng4LoadingSpinnerService.hide();
       }.bind(this), 1000);
     }
-    
   }
 
   // refresh(): void {
@@ -260,16 +261,35 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  selectuser(ind)
+  searchstatus(){
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("myInputstatus");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("ordertable");
+    tr = table.getElementsByTagName("tr");
+    console.log('row length---'+tr.length);
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[11].getElementsByTagName('select')[0];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      } 
+    }
+  }
+  selectuser(ind,ustarget)
   {
-    console.log('you selected:...' +this.iduser[ind]);
-    this.userassigned=this.iduser[ind];
+    console.log('you selected:...' +ustarget.value+ this.iduser[ind]);
+    this.userassigned=ustarget.value;
   }
 
-  selectorderstatus(ind)
+  selectorderstatus(ind,ustarget)
   {
     console.log('you selected:...' +this.idorder[ind]);
-    this.orderstatus=this.idorder[ind];
+    this.orderstatus=ustarget.value;
   }
 
   savedata(){
