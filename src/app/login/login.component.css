@@ -38,4 +38,10 @@ a:hover {
 button, input {
     overflow: visible;
     margin: 13px;
+    width: -webkit-fill-available;
+    font-size: 70%;
+}
+
+label {
+    font-size: 100%;
 }

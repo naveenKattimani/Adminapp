@@ -4,6 +4,9 @@ import * as firebase from 'firebase';
 import { Ng4LoadingSpinnerModule, Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 import { DpersonsComponent } from '../dpersons/dpersons.component';
 import * as emailjs from 'emailjs-com';
+import { HttpClient } from '@angular/common/http';
+import 'rxjs/Rx'; 
+import { Options } from 'selenium-webdriver/safari';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +27,7 @@ export class HomeComponent implements OnInit {
   userassigned="";
   orderstatus="";
 
-  constructor( private ng4LoadingSpinnerService: Ng4LoadingSpinnerService) { 
+  constructor( private ng4LoadingSpinnerService: Ng4LoadingSpinnerService,private http:HttpClient) { 
     //setTimeout( () => { this.refreshdata(); }, 1000 );
     this.statusArray=['Not Assigned','Delivered','In Progress','Cancelled'];
   }
@@ -100,6 +103,15 @@ export class HomeComponent implements OnInit {
               break
             case ('restaurantid'):
               this.myorders[i].restaurantid=snapshot.val();
+              firebase.database().ref('/restaurants/'+snapshot.val()+'/').on('child_added', (snapshot1)=>{
+                
+                switch(snapshot1.key)
+                {
+                case ('name'):
+                console.log('>><<<<>>'+snapshot1.key+snapshot1.val() );
+                    this.myorders[i].restaurantid= '('+this.myorders[i].restaurantid+ ') '+ snapshot1.val();
+                }
+                });
               break
             case ('packagingcharge'):
               this.myorders[i].packagingcharge=snapshot.val();
@@ -306,6 +318,17 @@ export class HomeComponent implements OnInit {
     this.userassigned="";
     this.orderstatus="";
     }
+
+    return new Promise(resolve => {
+      console.log("Before API")
+      this.http.get("https://api.whatsapp.com/send?phone='+'919591317407+'&text=I'm%20interested%20in%20your%20car%20for%20sale").map(response => response).subscribe(data => {
+        resolve(data);
+        console.log("After API",data)
+      }, err => {
+      });
+    });
+
+
     var messagedata="some data";
     this.sendemail(this.userassigned,messagedata)
   }

@@ -14,6 +14,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { Ng4LoadingSpinnerModule, Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 import {SelectModule} from 'ng2-select';
+import { HttpClientModule } from '@angular/common/http';
+
 import { ReactiveFormsModule,
   FormsModule,
   FormGroup,
@@ -31,7 +33,7 @@ firebase.initializeApp(environment.firebaseConfig)
     
   ],
   imports: [
-    BrowserModule,RouterModule,FormsModule, ReactiveFormsModule,
+    BrowserModule,HttpClientModule,RouterModule,FormsModule, ReactiveFormsModule,
     Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     SelectModule,
@@ -40,5 +42,6 @@ firebase.initializeApp(environment.firebaseConfig)
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent],  
+  
 })
 export class AppModule { }

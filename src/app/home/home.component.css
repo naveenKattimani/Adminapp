@@ -14,13 +14,14 @@ label {
     display: inline-block;
     margin-bottom: .5rem;
     margin-right: 12px;
-    font-size: 13px;
+    font-size: 10px;
     font-weight: bold;
 }
 
 button, input {
     border-radius: 5px;
     padding-left: 10px;
+    width:50%;
 }
 
 .container
@@ -34,7 +35,7 @@ button, input {
     float: right;
     padding-bottom: 5px;
     background-color: rgb(85, 190, 24);
-    width:100px;
+    width:40%;
 }
 
 .refresh{
@@ -42,7 +43,7 @@ button, input {
     margin-right: 8%;
     padding-bottom: 5px;
     background-color: rgb(109, 138, 218);
-    width:100px;
+    width:40%;
 }
 
 select {
