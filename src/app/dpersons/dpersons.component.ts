@@ -21,6 +21,7 @@ export class DpersonsComponent implements OnInit {
   users=new Array();
   myform: FormGroup;
   constructor(private ng4LoadingSpinnerService: Ng4LoadingSpinnerService) { 
+    
   }
 
   ngOnInit() {
@@ -29,11 +30,13 @@ export class DpersonsComponent implements OnInit {
         this.getusers();
         this.createFormControls();
         this.createForm();
-        this.ng4LoadingSpinnerService.hide();
-      }.bind(this), 1000);
+        //this.ng4LoadingSpinnerService.hide();
+        this.users.subscribe(() => this.ng4LoadingSpinnerService.hide())
+      }.bind(this), 200);
         
   }
 
+  
   createFormControls() {
     console.log('create form contrll');
     this.username = new FormControl("", Validators.required);
@@ -97,5 +100,6 @@ export class DpersonsComponent implements OnInit {
       i=i+1;
 
   }));
+  
   }
 }

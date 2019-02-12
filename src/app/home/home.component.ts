@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
     this.ng4LoadingSpinnerService.show();      
       setTimeout(function() {
         this.refreshdata();        
-        this.ng4LoadingSpinnerService.hide();
+        //this.ng4LoadingSpinnerService.hide();
       }.bind(this), 1000);
       
   }
@@ -69,9 +69,9 @@ export class HomeComponent implements OnInit {
     this.ng4LoadingSpinnerService.show();      
       setTimeout(function() {
         this.getusers();
-        this.getmyorderhistory();
-        
-        this.ng4LoadingSpinnerService.hide();
+        this.getmyorderhistory();        
+        //this.ng4LoadingSpinnerService.hide();
+        this.myorders.subscribe(() => this.ng4LoadingSpinnerService.hide())
       }.bind(this), 300);
   }
 

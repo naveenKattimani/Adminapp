@@ -15,6 +15,8 @@ import { environment } from '../environments/environment';
 import { Ng4LoadingSpinnerModule, Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 import {SelectModule} from 'ng2-select';
 import { HttpClientModule } from '@angular/common/http';
+import { SelectDropDownModule } from 'ngx-select-dropdown'
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { ReactiveFormsModule,
   FormsModule,
@@ -33,7 +35,8 @@ firebase.initializeApp(environment.firebaseConfig)
     
   ],
   imports: [
-    BrowserModule,HttpClientModule,RouterModule,FormsModule, ReactiveFormsModule,
+    BrowserModule,HttpClientModule,RouterModule,FormsModule, ReactiveFormsModule,SelectDropDownModule,
+    NgMultiSelectDropDownModule.forRoot(),
     Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     SelectModule,
